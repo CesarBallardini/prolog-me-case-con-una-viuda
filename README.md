@@ -1,6 +1,6 @@
 # README - Dos casamientos
 
-Una humorada que me pasaron en vídeo, relata una historia, que puede pasarse a PROLOG.
+Una humorada que me pasaron en ![vídeo](https://user-images.githubusercontent.com/642255/119041128-9e759c80-b98c-11eb-9695-c7b1bf5e7605.mp4), relata una historia, que puede pasarse a PROLOG.
 
 
 # El relato
