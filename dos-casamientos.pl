@@ -28,10 +28,11 @@ Además yo soy mi propio abuelo.
 Los personajes: 
 
   * yo
-  * mi_mujer
+  * mi_mujer (la viuda)
 
   * hija_de_mi_mujer
   * mi_padre
+  * mi_madre (fallecida)
 
   * hijo_de_hija_de_mi_mujer
   * hijo_de_mi_mujer
@@ -43,6 +44,7 @@ Los personajes:
 :- set_prolog_stack(global, limit(8 000 000)).  % limit term space (8Mb)
 :- set_prolog_stack(local,  limit(2 000 000)).  % limit environment space
 
+persona(mi_madre).
 persona(mi_padre).
 persona(yo).
 
@@ -52,12 +54,16 @@ persona(hija_de_mi_mujer).
 persona(hijo_de_hija_de_mi_mujer).
 persona(hijo_de_mi_mujer).
 
+% no se usan, estan por completitud: vive/1, no_vive/1
+no_vive(mi_madre).
+vive(X) :- persona(X), \+ no_vive(X).
 
 hombre(mi_padre).
 hombre(yo).
 hombre(hijo_de_hija_de_mi_mujer).
 hombre(hijo_de_mi_mujer).
 
+mujer(mi_madre).
 mujer(mi_mujer).
 mujer(hija_de_mi_mujer).
 
@@ -76,11 +82,12 @@ padre_de(mi_padre,yo).
 
 padre_general_de(Hombre, Persona) :-
     (
-      padre_de(Hombre, Persona), !
+      padre_de(Hombre, Persona)%, !
        ;
       padrastro_de(Hombre, Persona)
     ).
 
+madre_de(mi_madre,yo).
 madre_de(mi_mujer,hija_de_mi_mujer).
 madre_de(hija_de_mi_mujer, hijo_de_hija_de_mi_mujer).
 madre_de(mi_mujer,hijo_de_mi_mujer).
@@ -89,7 +96,7 @@ madre_de(mi_mujer,hijo_de_mi_mujer).
 
 madre_general_de(Mujer, Persona) :-
     (
-      madre_de(Mujer, Persona), !
+      madre_de(Mujer, Persona)%, !
         ;
       madrastra_de(Mujer, Persona)
     ).
@@ -97,13 +104,14 @@ madre_general_de(Mujer, Persona) :-
 
 hijo_de(Hijo, Progenitor) :-
     persona(Hijo), persona(Progenitor),
-  ( padre_de(Progenitor, Hijo), !
+  ( padre_de(Progenitor, Hijo)%, !
           ;
     madre_de(Progenitor, Hijo)
   ).
 
 
 /* casado(Esposo, Esposa) */
+casado(mi_padre, mi_madre).
 casado(yo, mi_mujer).
 casado(mi_padre, hija_de_mi_mujer).
 
@@ -230,8 +238,8 @@ el_hijo_de_mi_mujer_es_cuñado_de_mi_padre :-
 
 /* no anda */
 mi_mujer_es_suegra_de_su_hija :-
-    mujer(X),
     suegra_de(mi_mujer, X),
+    mujer(X),
     hijo_de(X, mi_mujer).
 
 
@@ -245,10 +253,10 @@ mi_padre_es_mi_hijo :-
 	padre_de(Padre, yo),
     hijo_de(yo, Padre).
 
-/* no anda */
 la_mujer_de_mi_padre_es_mi_hijo :-
-	padre_de(Padre, yo),
+    padre_de(Padre, yo),
     casado(Padre, Mujer),
+    mujer(Mujer),
     hijo_de(yo, Mujer).
 
 yo_soy_mi_propio_abuelo :-

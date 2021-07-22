@@ -32,11 +32,11 @@ test(el_hijo_de_mi_mujer_es_tio_de_sus_hijos, blocked(no_hay_hijos_no_implementa
 
 test(mi_mujer_es_suegra_de_su_hija, blocked(no_anda)) :- mi_mujer_es_suegra_de_su_hija.
 
-test(yo_soy_padre_de_mi_madre) :- yo_soy_padre_de_mi_madre.
+test(yo_soy_padre_de_mi_madre, [nondet]) :- yo_soy_padre_de_mi_madre.
 
-test(mi_padre_es_mi_hijo) :- mi_padre_es_mi_hijo.
+test(mi_padre_es_mi_hijo, [nondet]) :- mi_padre_es_mi_hijo.
 
-test(la_mujer_de_mi_padre_es_mi_hijo, blocked(no_anda)) :- la_mujer_de_mi_padre_es_mi_hijo.
+test(la_mujer_de_mi_padre_es_mi_hijo, [nondet]) :- la_mujer_de_mi_padre_es_mi_hijo.
 
 test(yo_soy_mi_propio_abuelo) :- yo_soy_mi_propio_abuelo.
 
