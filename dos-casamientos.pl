@@ -39,6 +39,8 @@ Los personajes:
 
 */
 
+:- encoding(utf8).  % source file uses non-ASCII identifiers (cuñado_de, etc.)
+
 % Student exercise profile
 :- set_prolog_flag(occurs_check, error).        % disallow cyclic terms
 :- set_prolog_stack(global, limit(8 000 000)).  % limit term space (8Mb)
@@ -193,6 +195,11 @@ cuñado_de(Cuñado, Persona) :-
       casado(Persona, Hermana)
      ).
 
+tio_de(Tio, Sobrino) :-
+    hombre(Tio),
+    hermano_de(Tio, Progenitor),
+    ( padre_general_de(Progenitor, Sobrino) ; madre_general_de(Progenitor, Sobrino) ).
+
 /* Conclusiones */
 
 mi_mujer_es_suegra_de_su_suegro :-
@@ -204,10 +211,9 @@ mi_hijastra_es_mi_madre :-
     hijastra_de(Hijastra, yo),
     madre_general_de(Hijastra, yo), !.
 
-/* no anda */
 mi_padre_es_mi_yerno :-
     padre_de(Padre, yo),
-    yerno_de(yo, Padre).
+    yerno_de(Padre, yo), !.
 
 el_hijo_de_mi_madrastra_es_mi_hermano :-
     madrastra_de(Madrastra, yo),
@@ -234,13 +240,16 @@ el_hijo_de_mi_mujer_es_cuñado_de_mi_padre :-
     padre_de(Padre, yo),
     cuñado_de(Hijo, Padre), !.
 
-/* el_hijo_de_mi_mujer_es_tio_de_sus_hijos */
+el_hijo_de_mi_mujer_es_tio_de_sus_hijos :-
+    hijo_de(Hijo, mi_mujer), hombre(Hijo),
+    padre_de(_, Sobrino),
+    tio_de(Hijo, Sobrino), !.
 
-/* no anda */
 mi_mujer_es_suegra_de_su_hija :-
-    suegra_de(mi_mujer, X),
-    mujer(X),
-    hijo_de(X, mi_mujer).
+    madre_de(mi_mujer, Hija), mujer(Hija),
+    casado(Yerno, Hija),
+    yerno_de(Yerno, yo),
+    casado(yo, mi_mujer), !.
 
 
 yo_soy_padre_de_mi_madre :-

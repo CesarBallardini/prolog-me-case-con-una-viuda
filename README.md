@@ -56,8 +56,8 @@ Lo cual nos va a mostrar algo como:
 
 ```text
 
-% PL-Unit: doscasamientos .......... done
-% All 10 tests passed
+% PL-Unit: doscasamientos .............. done
+% All 14 tests passed
 
 ```
 
