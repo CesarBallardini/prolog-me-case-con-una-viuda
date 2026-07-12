@@ -1,6 +1,6 @@
 # README - Me casé con una viuda - SWI Prolog
 
-[![Build Status](https://travis-ci.org/CesarBallardini/prolog-me-case-con-una-viuda.svg?branch=main)](https://travis-ci.org/CesarBallardini/prolog-me-case-con-una-viuda)
+[![tests](https://github.com/CesarBallardini/prolog-me-case-con-una-viuda/actions/workflows/tests.yml/badge.svg)](https://github.com/CesarBallardini/prolog-me-case-con-una-viuda/actions/workflows/tests.yml)
 
 Una humorada que me pasaron en vídeo y puedes [escuchar](https://user-images.githubusercontent.com/642255/119041128-9e759c80-b98c-11eb-9695-c7b1bf5e7605.mp4), relata una historia, que puede pasarse a PROLOG.
 
@@ -61,7 +61,7 @@ Lo cual nos va a mostrar algo como:
 
 ```
 
-Al hacer commit en este repositorio, Travis se ocupa de correr los tests para saber que está funcionando y que no.
+Al hacer push o abrir un pull request en este repositorio, un workflow de GitHub Actions (`.github/workflows/tests.yml`) se ocupa de correr los tests para saber que está funcionando y que no.
 
 
 

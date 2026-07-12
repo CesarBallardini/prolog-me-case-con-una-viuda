@@ -1,0 +1,22 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  plunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SWI-Prolog
+        run: |
+          sudo apt-add-repository ppa:swi-prolog/stable -y
+          sudo apt-get update -q
+          sudo apt-get install -y swi-prolog-nox
+
+      - name: Run tests
+        run: |
+          swipl --version
+          swipl -s tests/test_dos-casamientos.pl -g run_tests,halt -t 'halt(1)'
