@@ -63,5 +63,8 @@ Lo cual nos va a mostrar algo como:
 
 Al hacer push o abrir un pull request en este repositorio, un workflow de GitHub Actions (`.github/workflows/tests.yml`) se ocupa de correr los tests para saber que está funcionando y que no.
 
+# Licencia
+
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
 
 
